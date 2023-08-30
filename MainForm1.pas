@@ -4,12 +4,13 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Clipbrd, Vcl.ExtDlgs;
+  System.UITypes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Clipbrd, Vcl.Dialogs;
 
 type
   TForm1 = class(TForm)
     Label1: TLabel;
+    Label2: TLabel;
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
@@ -17,7 +18,7 @@ type
     Edit1: TEdit;
     Image1: TImage;
     Shape1: TShape;
-    SavePictureDialog1: TSavePictureDialog;
+    SaveDialog1: TSaveDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormResize(Sender: TObject);
@@ -47,8 +48,10 @@ end;
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if ssCtrl in Shift then
-  if Key = Ord('V') then
-  Button1Click(Sender);
+  begin
+    if Key = Ord('V') then Button1Click(Sender);
+    if Key = Ord('S') then Button3Click(Sender);
+  end;
 end;
 
 procedure TForm1.FormResize(Sender: TObject);
@@ -67,9 +70,9 @@ end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-  if SavePictureDialog1.Execute then
+  if SaveDialog1.Execute then
   begin
-    fn:= SavePictureDialog1.FileName;
+    fn:= SaveDialog1.FileName;
     Edit1.Text:= ExtractFileName(fn);
   end;
 end;
@@ -79,8 +82,19 @@ var
   png: TPngImage;
 begin
   // Image1.Picture.SaveToFile('R:\Test.png');
-  if fn = '' then exit;
+  if fn = '' then fn:= Edit1.Text;
+  if fn = '' then
+  begin
+    ShowMessage('파일 이름을 입력해 주세요.');
+    Edit1.SetFocus;
+    exit;
+  end;
 
+  // 파일이 이미 존재하는지 검사
+  if FileExists(fn) then
+  if MessageDlg('파일이 이미 있습니다. 덮어 쓸까요', mtConfirmation, mbOkCancel, 0) = mrCancel then exit;
+
+  // 이제 저장을 진행한다
   png:= TPngImage.Create;
   try
     png.Assign(Image1.Picture.Bitmap);
@@ -89,6 +103,9 @@ begin
   finally
     png.Free;
   end;
+
+  // 화면에 결과 출력
+  Label2.Caption:= 'Successfully saved to ' + ExtractFileName(fn);
 end;
 
 procedure TForm1.Button4Click(Sender: TObject);

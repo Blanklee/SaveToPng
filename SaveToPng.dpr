@@ -1,4 +1,4 @@
-program ImageTest;
+program SaveToPng;
 
 uses
   Vcl.Forms,

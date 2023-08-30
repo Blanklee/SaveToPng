@@ -23,3 +23,9 @@
  . File 버튼 클릭시 FileName 입력가능 (PE에서 동작안됨) \
  . WinPE는 64bit로 동작하며, shfolder.dll가 함께 있어야 함
 
+-ver 1.2a / 2018.05.12 밤 (Incomplete) \
+ . SavePictureDialog1을 SaveDialog1로 변경 \
+ . Dialog는 어차피 안되므로 파일이름을 Edit로 직접 입력받음 \
+ . Save시 동일파일 있으면 덮어쓸지 물어본다 \
+ . Save가 완료됐으면 다됐다고 화면에 표시해 준다
+

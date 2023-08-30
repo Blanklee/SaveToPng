@@ -32,14 +32,21 @@ object Form1: TForm1
   end
   object Label1: TLabel
     Left = 384
-    Top = 128
+    Top = 112
     Width = 164
     Height = 20
     Caption = 'File name to save (.png)'
   end
+  object Label2: TLabel
+    Left = 384
+    Top = 253
+    Width = 59
+    Height = 20
+    Caption = 'Saved to'
+  end
   object Button1: TButton
     Left = 384
-    Top = 40
+    Top = 24
     Width = 322
     Height = 65
     Caption = 'Paste image from Clipboard'
@@ -49,7 +56,7 @@ object Form1: TForm1
   end
   object Button3: TButton
     Left = 384
-    Top = 194
+    Top = 178
     Width = 185
     Height = 55
     Caption = 'Save image'
@@ -59,14 +66,14 @@ object Form1: TForm1
   end
   object Edit1: TEdit
     Left = 384
-    Top = 152
+    Top = 136
     Width = 241
     Height = 28
     TabOrder = 1
   end
   object Button2: TButton
     Left = 631
-    Top = 152
+    Top = 136
     Width = 75
     Height = 28
     Caption = 'File..'
@@ -76,7 +83,7 @@ object Form1: TForm1
   end
   object Button4: TButton
     Left = 584
-    Top = 194
+    Top = 178
     Width = 122
     Height = 55
     Caption = 'Exit'
@@ -84,10 +91,10 @@ object Form1: TForm1
     OnClick = Button4Click
     OnKeyDown = FormKeyDown
   end
-  object SavePictureDialog1: TSavePictureDialog
+  object SaveDialog1: TSaveDialog
     DefaultExt = '.png'
     Filter = 'PNG image file (*.png)|*.png'
-    Left = 104
+    Left = 120
     Top = 104
   end
 end

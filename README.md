@@ -29,3 +29,10 @@
  . Save시 동일파일 있으면 덮어쓸지 물어본다 \
  . Save가 완료됐으면 다됐다고 화면에 표시해 준다
 
+-ver 1.2b / 2018.05.12 밤, 05.13 오전 (★Good) \
+ . Dialog 안뜨는 현상은 UseLatestCommonDialogs:= False; 로 해결 \
+ . SaveDialog1을 다시 SavePictureDialog1로 변경 \
+ . Edit1은 ReadOnly로, 파일이름은 File.. 버튼을 통해서 입력받음 \
+ . 저장전에 File이름이 Empty한지, Image가 Empty한지 Check \
+ . 파일이 이미 있으면 덮어쓸지 물어봄
+

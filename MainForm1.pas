@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   System.UITypes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Clipbrd, Vcl.Dialogs;
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Clipbrd, Vcl.Dialogs, Vcl.ExtDlgs;
 
 type
   TForm1 = class(TForm)
@@ -18,7 +18,7 @@ type
     Edit1: TEdit;
     Image1: TImage;
     Shape1: TShape;
-    SaveDialog1: TSaveDialog;
+    SavePictureDialog1: TSavePictureDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormResize(Sender: TObject);
@@ -43,6 +43,8 @@ implementation
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   fn:= '';
+  // WinPE에서 Dialog를 띄울수 있게 해준다
+  UseLatestCommonDialogs:= False;
 end;
 
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -70,9 +72,9 @@ end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-  if SaveDialog1.Execute then
+  if SavePictureDialog1.Execute then
   begin
-    fn:= SaveDialog1.FileName;
+    fn:= SavePictureDialog1.FileName;
     Edit1.Text:= ExtractFileName(fn);
   end;
 end;
@@ -82,7 +84,6 @@ var
   png: TPngImage;
 begin
   // Image1.Picture.SaveToFile('R:\Test.png');
-  if fn = '' then fn:= Edit1.Text;
   if fn = '' then
   begin
     ShowMessage('파일 이름을 입력해 주세요.');
@@ -92,7 +93,15 @@ begin
 
   // 파일이 이미 존재하는지 검사
   if FileExists(fn) then
-  if MessageDlg('파일이 이미 있습니다. 덮어 쓸까요', mtConfirmation, mbOkCancel, 0) = mrCancel then exit;
+  if MessageDlg('파일이 이미 있습니다. 덮어 쓸까요?', mtConfirmation, mbOkCancel, 0) = mrCancel then exit;
+
+  // Empty하면 Save할때 Error난다
+  if Image1.Picture.Bitmap.Empty then
+  begin
+    ShowMessage('Image is empty.');
+    exit;
+  end;
+
 
   // 이제 저장을 진행한다
   png:= TPngImage.Create;

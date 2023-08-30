@@ -49,7 +49,7 @@ object Form1: TForm1
     Top = 24
     Width = 322
     Height = 65
-    Caption = 'Paste image from Clipboard'
+    Caption = 'Paste image from Clipboard (Ctrl+V)'
     TabOrder = 0
     OnClick = Button1Click
     OnKeyDown = FormKeyDown
@@ -59,7 +59,7 @@ object Form1: TForm1
     Top = 178
     Width = 185
     Height = 55
-    Caption = 'Save image'
+    Caption = 'Save image (Ctrl+S)'
     TabOrder = 3
     OnClick = Button3Click
     OnKeyDown = FormKeyDown
@@ -69,7 +69,9 @@ object Form1: TForm1
     Top = 136
     Width = 241
     Height = 28
+    ReadOnly = True
     TabOrder = 1
+    OnKeyDown = FormKeyDown
   end
   object Button2: TButton
     Left = 631
@@ -91,10 +93,10 @@ object Form1: TForm1
     OnClick = Button4Click
     OnKeyDown = FormKeyDown
   end
-  object SaveDialog1: TSaveDialog
+  object SavePictureDialog1: TSavePictureDialog
     DefaultExt = '.png'
     Filter = 'PNG image file (*.png)|*.png'
-    Left = 120
+    Left = 104
     Top = 104
   end
 end

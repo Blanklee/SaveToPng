@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Clipbrd, Vcl.ExtDlgs;
+  System.UITypes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Clipbrd, Vcl.Dialogs, Vcl.ExtDlgs;
 
 type
   TForm1 = class(TForm)
@@ -22,9 +22,10 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    fn: string;
+    png: TPngImage;
   public
     { Public declarations }
   end;
@@ -38,7 +39,17 @@ implementation
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  fn:= '';
+  // Member 초기화
+  png:= TPngImage.Create;
+
+  // WinPE에서 Dialog를 띄울수 있게 해준다
+  UseLatestCommonDialogs:= False;
+end;
+
+procedure TForm1.FormDestroy(Sender: TObject);
+begin
+  // Member 정리
+  png.Free;
 end;
 
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -54,8 +65,8 @@ end;
 
 procedure TForm1.FormResize(Sender: TObject);
 begin
-  if ClientHeight < 312 then ClientHeight:= 312;
-  if ClientWidth < 744 then ClientWidth:= 744;
+  if ClientWidth  < 770 then ClientWidth := 770;
+  if ClientHeight < 340 then ClientHeight:= 340;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -68,28 +79,46 @@ end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 var
-  png: TPngImage;
+  fn: string;
 begin
+  // Empty하면 Save할때 Error난다
+  if Image1.Picture.Bitmap.Empty then
+  begin
+    ShowMessage('이미지가 비어 있습니다. Ctrl+V 눌러 Paste 해주세요.');
+    exit;
+  end;
+
   // 파일이름을 입력받는다. 취소하면 저장않음
   if not SavePictureDialog1.Execute then exit;
 
   // 여기서부터 파일이름 입력받았음
   fn:= SavePictureDialog1.FileName;
-  Label1.Caption:= 'File name : ' + ExtractFileName(fn);
-  if fn = '' then exit;
+  if fn = '' then
+  begin
+    // 여기는 들어올 일이 없다
+    ShowMessage('파일 이름을 입력해 주세요.');
+    exit;
+  end;
+
+  // 파일이 이미 존재하는지 검사
+  if FileExists(fn) then
+  if MessageDlg('파일이 이미 있습니다. 덮어 쓸까요?', mtConfirmation, mbOkCancel, 0) = mrCancel then exit;
+
 
   // 이미지를 파일로 저장한다
   // Image1.Picture.SaveToFile(fn); 이렇게 하면 bmp로 저장됨
 
   // png 파일로 저장한다
-  png:= TPngImage.Create;
   try
-    png.Assign(Image1.Picture.Bitmap);
     // png.Assign(ClipBoard); => 오류남
+    png.Assign(Image1.Picture.Bitmap);
     png.SaveToFile(fn);
-  finally
-    png.Free;
+  except
+    exit;
   end;
+
+  // 화면에 결과 출력
+  Label1.Caption:= 'Successfully saved to ' + ExtractFileName(fn);
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);

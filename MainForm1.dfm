@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Paste image & Save to png'
-  ClientHeight = 312
-  ClientWidth = 744
+  ClientHeight = 340
+  ClientWidth = 770
   Color = clBtnFace
   Font.Charset = HANGEUL_CHARSET
   Font.Color = clWindowText
@@ -12,56 +12,66 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnResize = FormResize
+  DesignSize = (
+    770
+    340)
   PixelsPerInch = 96
   TextHeight = 20
   object Shape1: TShape
-    Left = 8
-    Top = 16
+    Left = 24
+    Top = 24
     Width = 345
     Height = 265
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Brush.Color = clBtnFace
   end
   object Image1: TImage
-    Left = 16
-    Top = 24
+    Left = 32
+    Top = 32
     Width = 329
     Height = 249
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Stretch = True
   end
   object Label1: TLabel
-    Left = 384
-    Top = 151
-    Width = 74
+    Left = 400
+    Top = 245
+    Width = 59
     Height = 20
-    Caption = 'File name :'
+    Anchors = [akTop, akRight]
+    Caption = 'Saved to'
   end
   object Button1: TButton
-    Left = 384
-    Top = 40
+    Left = 400
+    Top = 64
     Width = 322
     Height = 65
+    Anchors = [akTop, akRight]
     Caption = 'Paste image from Clipboard (Ctrl+V)'
     TabOrder = 0
     OnClick = Button1Click
     OnKeyDown = FormKeyDown
   end
   object Button2: TButton
-    Left = 384
-    Top = 194
+    Left = 400
+    Top = 170
     Width = 185
     Height = 55
+    Anchors = [akTop, akRight]
     Caption = 'Save image (Ctrl+S)'
     TabOrder = 1
     OnClick = Button2Click
     OnKeyDown = FormKeyDown
   end
   object Button3: TButton
-    Left = 584
-    Top = 194
+    Left = 600
+    Top = 170
     Width = 122
     Height = 55
+    Anchors = [akTop, akRight]
     Caption = 'Exit'
     TabOrder = 2
     OnClick = Button3Click

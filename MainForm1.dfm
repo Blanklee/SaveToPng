@@ -73,7 +73,7 @@ object Form1: TForm1
     Width = 122
     Height = 55
     Anchors = [akTop, akRight]
-    Caption = 'Exit'
+    Caption = 'E&xit'
     TabOrder = 2
     OnClick = Button3Click
     OnKeyDown = FormKeyDown

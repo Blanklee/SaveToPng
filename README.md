@@ -72,3 +72,8 @@
     참고: http://www.scalabium.com/faq/dct0030.htm
     참고: http://edn.embarcadero.com/br/article/10432
 
+-ver 1.4 / 2018.07.05 오전 (★Good) \
+ . Exit 버튼을 E&xit로 변경, Alt+X 단축키 사용 가능하게 함 \
+ . 펭귄 Icon을 펭귄6_96.ico로 변경: 모서리가 둥근 사각형, 연노랑 배경 \
+ . 기존에는 투명 배경으로 Icon이 거칠게 보였음
+

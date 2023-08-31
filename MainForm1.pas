@@ -17,12 +17,12 @@ type
     Shape1: TShape;
     SavePictureDialog1: TSavePictureDialog;
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormResize(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     png: TPngImage;
@@ -94,7 +94,7 @@ begin
   // System Menu의 About을 클릭하면 실행
   if Msg.WParam = WM_ABOUT then
   begin
-    ShowMessage('SaveToPng v1.3c, Made by 이경백, 2018.05');
+    ShowMessage('SaveToPng v1.4, Made by 이경백, 2018.07');
   end;
 end;
 

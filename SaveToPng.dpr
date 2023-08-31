@@ -2,13 +2,13 @@ program SaveToPng;
 
 uses
   Vcl.Forms,
-  MainForm1 in 'MainForm1.pas' {Form1};
+  MainForm1 in 'MainForm1.pas' {MainForm};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TMainForm, MainForm);
   Application.Run;
 end.

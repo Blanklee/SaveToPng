@@ -1,4 +1,4 @@
-object Form1: TForm1
+object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'Paste image & Save to png'
@@ -32,14 +32,14 @@ object Form1: TForm1
   end
   object Label1: TLabel
     Left = 384
-    Top = 151
+    Top = 104
     Width = 74
     Height = 20
     Caption = 'File name :'
   end
   object Button1: TButton
     Left = 384
-    Top = 40
+    Top = 24
     Width = 322
     Height = 65
     Caption = 'Paste image from Clipboard (Ctrl+V)'
@@ -49,7 +49,7 @@ object Form1: TForm1
   end
   object Button2: TButton
     Left = 384
-    Top = 194
+    Top = 130
     Width = 185
     Height = 55
     Caption = 'Save image (Ctrl+S)'
@@ -59,7 +59,7 @@ object Form1: TForm1
   end
   object Button3: TButton
     Left = 584
-    Top = 194
+    Top = 130
     Width = 122
     Height = 55
     Caption = 'Exit'
@@ -67,10 +67,34 @@ object Form1: TForm1
     OnClick = Button3Click
     OnKeyDown = FormKeyDown
   end
+  object Button4: TButton
+    Left = 384
+    Top = 201
+    Width = 322
+    Height = 33
+    Caption = 'Test GetSaveFileName'
+    TabOrder = 3
+    OnClick = Button4Click
+  end
+  object Button5: TButton
+    Left = 384
+    Top = 240
+    Width = 322
+    Height = 33
+    Caption = 'Test UseLatestCommonDialogs := False'
+    TabOrder = 4
+    OnClick = Button5Click
+  end
   object SavePictureDialog1: TSavePictureDialog
     DefaultExt = '.png'
     Filter = 'PNG image file (*.png)|*.png'
     Left = 104
+    Top = 104
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.png'
+    Filter = 'PNG image file (*.png)|*.png'
+    Left = 216
     Top = 104
   end
 end

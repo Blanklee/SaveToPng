@@ -34,7 +34,8 @@ object Form1: TForm1
     Width = 329
     Height = 249
     Anchors = [akLeft, akTop, akRight, akBottom]
-    Stretch = True
+    Center = True
+    Proportional = True
   end
   object Label1: TLabel
     Left = 400

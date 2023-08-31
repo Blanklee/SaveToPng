@@ -59,3 +59,16 @@
  . Save 전에 FileName이 Empty한지, Image가 Empty한지 Check \
  . Save시 File이 이미 있으면 Overwrite할지 물어봄
 
+-v1.3c / 2018.05.13 오전 오후 (★Good) \
+ . Show Image Preview: 가로세로 비율 찌그러뜨리지 않음
+
+    Stretch=False;
+    Proportional=True;
+    Center=True;
+
+ . 펭귄 Icon 작성, 적용 \
+ . System Menu에 About Menu 추가 - 'Made by Blanklee'
+
+    참고: http://www.scalabium.com/faq/dct0030.htm
+    참고: http://edn.embarcadero.com/br/article/10432
+

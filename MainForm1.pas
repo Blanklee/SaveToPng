@@ -26,6 +26,8 @@ type
   private
     { Private declarations }
     png: TPngImage;
+    // procedure OnAppMessage(var Msg: TMsg; var Handled: boolean);
+    procedure wmSysCommand(var Msg: TMessage); message WM_SYSCOMMAND;
   public
     { Public declarations }
   end;
@@ -37,13 +39,29 @@ implementation
 
 {$R *.dfm}
 
+const
+  WM_ABOUT = WM_USER + 1;
+
 procedure TForm1.FormCreate(Sender: TObject);
+var
+  sysMenu: THandle;
 begin
   // Member 초기화
   png:= TPngImage.Create;
 
   // WinPE에서 Dialog를 띄울수 있게 해준다
   UseLatestCommonDialogs:= False;
+
+  // System 메뉴에 About 추가
+  // http://www.scalabium.com/faq/dct0030.htm
+  sysMenu:= GetSystemMenu(Handle, False);
+  // AppendMenu(sysMenu, MF_SEPARATOR, 0, '');
+  InsertMenu(sysMenu, 0, MF_STRING, WM_ABOUT, 'About..');
+
+  // http://edn.embarcadero.com/br/article/10432
+  // Assign the application's OnMessage event to my own procedure
+  // so I can check for the hidden window's WM_SYSCOMMAND message.
+  // Application.OnMessage:= OnAppMessage;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -67,6 +85,17 @@ procedure TForm1.FormResize(Sender: TObject);
 begin
   if ClientWidth  < 770 then ClientWidth := 770;
   if ClientHeight < 340 then ClientHeight:= 340;
+end;
+
+procedure TForm1.wmSysCommand(var Msg: TMessage);
+begin
+  Inherited;
+
+  // System Menu의 About을 클릭하면 실행
+  if Msg.WParam = WM_ABOUT then
+  begin
+    ShowMessage('SaveToPng v1.3c, Made by 이경백, 2018.05');
+  end;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);

@@ -5,6 +5,13 @@
 - PrtScr키 누르고 SaveToPng에 붙여넣은 후 Save 하면 됨
 - 배포: WinPE 상에서 실행할 때는 shfolder.dll를 함께 배포할 것
 
+![v1 4_shot1](https://github.com/Blanklee/SaveToPng/assets/26485313/7cbe9c8d-a446-45ad-bf3e-21791e76f20f)
+
+![v1 4_shot2](https://github.com/Blanklee/SaveToPng/assets/26485313/c71a1852-07ad-411e-9bc8-f137294e3e4c)
+
+![v1 4_shot3](https://github.com/Blanklee/SaveToPng/assets/26485313/47a03b19-9287-40a9-b18a-467f03ce10ab)
+
+
 # Release Note
 -ver 1.0 / 2018.05.10 밤 (Design)
  . Delphi VCL Form으로 App 개발 시작 \

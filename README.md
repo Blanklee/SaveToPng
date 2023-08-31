@@ -18,7 +18,7 @@
  . 근데 이렇게 할 필요는 없음, Console이나 GUI나 64bit에서만 실행됨
 
 -ver 1.2 / 2018.05.11 밤 (Incomplete) \
- . v1.0을 64bit로 컴파일한 것 \
+ . 위의 v1.0을 64bit로 컴파일한 것 \
  . Ctrl-V 누르면 Paste 기능 동작 \
  . File 버튼 클릭시 FileName 입력가능 (PE에서 동작안됨) \
  . WinPE는 64bit로 동작하며, shfolder.dll가 함께 있어야 함
@@ -35,4 +35,10 @@
  . Edit1은 ReadOnly로, 파일이름은 File.. 버튼을 통해서 입력받음 \
  . 저장전에 File이름이 Empty한지, Image가 Empty한지 Check \
  . 파일이 이미 있으면 덮어쓸지 물어봄
+
+ver 1.3 / 2018.05.11 밤 (Incomplete) \
+ . UI 개선: File 버튼 삭제, Save 클릭시 무조건 Save As로 동작 \
+ . Edit1 삭제, 대신 파일이름을 Label로 보여줌 \
+ . Ctrl-S 누르면 Save As 동작 \
+ . 문제점: WinPE에서 Save As 등 Dialog가 뜨지 않음
 

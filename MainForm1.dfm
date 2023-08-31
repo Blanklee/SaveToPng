@@ -32,21 +32,14 @@ object Form1: TForm1
   end
   object Label1: TLabel
     Left = 384
-    Top = 112
-    Width = 164
+    Top = 151
+    Width = 74
     Height = 20
-    Caption = 'File name to save (.png)'
-  end
-  object Label2: TLabel
-    Left = 384
-    Top = 253
-    Width = 59
-    Height = 20
-    Caption = 'Saved to'
+    Caption = 'File name :'
   end
   object Button1: TButton
     Left = 384
-    Top = 24
+    Top = 40
     Width = 322
     Height = 65
     Caption = 'Paste image from Clipboard (Ctrl+V)'
@@ -54,43 +47,24 @@ object Form1: TForm1
     OnClick = Button1Click
     OnKeyDown = FormKeyDown
   end
-  object Button3: TButton
+  object Button2: TButton
     Left = 384
-    Top = 178
+    Top = 194
     Width = 185
     Height = 55
     Caption = 'Save image (Ctrl+S)'
-    TabOrder = 3
-    OnClick = Button3Click
-    OnKeyDown = FormKeyDown
-  end
-  object Edit1: TEdit
-    Left = 384
-    Top = 136
-    Width = 241
-    Height = 28
-    ReadOnly = True
     TabOrder = 1
-    OnKeyDown = FormKeyDown
-  end
-  object Button2: TButton
-    Left = 631
-    Top = 136
-    Width = 75
-    Height = 28
-    Caption = 'File..'
-    TabOrder = 2
     OnClick = Button2Click
     OnKeyDown = FormKeyDown
   end
-  object Button4: TButton
+  object Button3: TButton
     Left = 584
-    Top = 178
+    Top = 194
     Width = 122
     Height = 55
     Caption = 'Exit'
-    TabOrder = 4
-    OnClick = Button4Click
+    TabOrder = 2
+    OnClick = Button3Click
     OnKeyDown = FormKeyDown
   end
   object SavePictureDialog1: TSavePictureDialog

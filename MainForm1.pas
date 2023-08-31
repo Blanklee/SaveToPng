@@ -4,18 +4,15 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  System.UITypes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Clipbrd, Vcl.Dialogs, Vcl.ExtDlgs;
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Clipbrd, Vcl.ExtDlgs;
 
 type
   TForm1 = class(TForm)
     Label1: TLabel;
-    Label2: TLabel;
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    Button4: TButton;
-    Edit1: TEdit;
     Image1: TImage;
     Shape1: TShape;
     SavePictureDialog1: TSavePictureDialog;
@@ -25,7 +22,6 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
     fn: string;
@@ -43,16 +39,16 @@ implementation
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   fn:= '';
-  // WinPE에서 Dialog를 띄울수 있게 해준다
-  UseLatestCommonDialogs:= False;
 end;
 
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if ssCtrl in Shift then
   begin
+    // Ctrl-V 누르면 Paste
     if Key = Ord('V') then Button1Click(Sender);
-    if Key = Ord('S') then Button3Click(Sender);
+    // Ctrl-S 누르면 Save
+    if Key = Ord('S') then Button2Click(Sender);
   end;
 end;
 
@@ -71,39 +67,21 @@ begin
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
-begin
-  if SavePictureDialog1.Execute then
-  begin
-    fn:= SavePictureDialog1.FileName;
-    Edit1.Text:= ExtractFileName(fn);
-  end;
-end;
-
-procedure TForm1.Button3Click(Sender: TObject);
 var
   png: TPngImage;
 begin
-  // Image1.Picture.SaveToFile('R:\Test.png');
-  if fn = '' then
-  begin
-    ShowMessage('파일 이름을 입력해 주세요.');
-    Edit1.SetFocus;
-    exit;
-  end;
+  // 파일이름을 입력받는다. 취소하면 저장않음
+  if not SavePictureDialog1.Execute then exit;
 
-  // 파일이 이미 존재하는지 검사
-  if FileExists(fn) then
-  if MessageDlg('파일이 이미 있습니다. 덮어 쓸까요?', mtConfirmation, mbOkCancel, 0) = mrCancel then exit;
+  // 여기서부터 파일이름 입력받았음
+  fn:= SavePictureDialog1.FileName;
+  Label1.Caption:= 'File name : ' + ExtractFileName(fn);
+  if fn = '' then exit;
 
-  // Empty하면 Save할때 Error난다
-  if Image1.Picture.Bitmap.Empty then
-  begin
-    ShowMessage('Image is empty.');
-    exit;
-  end;
+  // 이미지를 파일로 저장한다
+  // Image1.Picture.SaveToFile(fn); 이렇게 하면 bmp로 저장됨
 
-
-  // 이제 저장을 진행한다
+  // png 파일로 저장한다
   png:= TPngImage.Create;
   try
     png.Assign(Image1.Picture.Bitmap);
@@ -112,12 +90,9 @@ begin
   finally
     png.Free;
   end;
-
-  // 화면에 결과 출력
-  Label2.Caption:= 'Successfully saved to ' + ExtractFileName(fn);
 end;
 
-procedure TForm1.Button4Click(Sender: TObject);
+procedure TForm1.Button3Click(Sender: TObject);
 begin
   Close;
 end;
